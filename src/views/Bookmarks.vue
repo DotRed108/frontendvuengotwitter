@@ -1,9 +1,8 @@
 <template>
-  <div class="home">
-    <CreatePost :is-home="true"></CreatePost>
+  <div class="Posts">
     <div class="post" v-for="post in responseData" :key="post.id">
-        <Post :post="post">
-        </Post>
+      <Post :post="post">
+      </Post>
     </div>
   </div>
   <div v-if="responseData.length" ref="pageBottom"></div>
@@ -11,25 +10,24 @@
 
 <script>
 import Post from "@/components/Post";
-import CreatePost from "@/components/CreatePost";
 import getAPICall from "@/mixins/getAPICall";
 import pagination from "@/mixins/pagination";
 
 export default {
-  name: 'Home',
-  components: {CreatePost, Post},
-  data () {
+  name: "Bookmarks",
+  data() {
     return {
       responseData: [],
     }
   },
   mixins: [getAPICall, pagination],
+  components: {Post},
   created() {
     this.callAPI()
   },
   methods: {
     async callAPI() {
-      let posts = await this.getAPICall(`/api/home/?page=${this.page}`);
+      let posts = await this.getAPICall(`api/bookmark-list/?page=${this.page}`);
       //For pagination/infinite scrolling
       this.maxPage = (posts.count/10)
       for (let i=0; i < posts.results.length; i++) {
@@ -40,8 +38,6 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped >
-.link {
-  text-decoration: none;
-}
+<style scoped>
+
 </style>
