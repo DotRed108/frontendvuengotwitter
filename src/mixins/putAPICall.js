@@ -5,7 +5,7 @@ export default {
     methods: {
         putAPICall(APIUrl, data) {
             return new Promise(function (resolve, reject) {
-                getAPI.put(APIUrl, data, {headers: {Authorization: `Bearer ${this.$store.state.accessToken}`}}
+                getAPI.put(APIUrl, data, {headers: {Authorization: `Bearer ${store.state.accessToken}`}}
                 ).then(response => {
                     resolve(response)
                 }).catch(err => {
